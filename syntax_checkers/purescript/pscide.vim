@@ -31,7 +31,7 @@ set cpo&vim
 
 function! SyntaxCheckers_purescript_pscide_IsAvailable() dict
   if (g:psc_ide_syntastic_mode == 1)
-    let version_output = syntastic#util#system('psc --version')
+    let version_output = syntastic#util#system('purs --version')
     let parsed_ver = syntastic#util#parseVersion(version_output)
     return syntastic#util#versionIsAtLeast(parsed_ver, [0, 8, 5, 0])
   endif
@@ -45,7 +45,7 @@ function! SyntaxCheckers_purescript_pscide_GetLocList() dict
     " Mode one doesn't use an executable, so we just do something trivial like
     " echo in makeprg and do the real work in Preprocess
     let loclist = SyntasticMake({
-        \ 'makeprg': self.makeprgBuild({'exe': 'echo', 'args': 'a'}), 
+        \ 'makeprg': self.makeprgBuild({'exe': 'echo', 'args': 'a'}),
         \ 'errorformat': '%t:%f:%l:%c:%m',
         \ 'Preprocess': function('PSCIDErebuild') })
   endif
